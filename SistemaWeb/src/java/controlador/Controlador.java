@@ -68,7 +68,9 @@ public class Controlador extends HttpServlet {
             acceso = listar;
         }
         else if (accion.equalsIgnoreCase("eliminar")) {
-            acceso = editar;
+            int idPersona = Integer.parseInt(request.getParameter("id"));
+            personaDAO.eliminar(idPersona);
+            acceso = listar;
         }
         
         RequestDispatcher dispatcher = request.getRequestDispatcher(acceso);
@@ -78,7 +80,43 @@ public class Controlador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String acceso = "";
+        String accion = request.getParameter("accion");
+        if (accion.equalsIgnoreCase("listar")) {
+            acceso = listar;
+        }
+        else if (accion.equalsIgnoreCase("nuevo")) {
+            acceso = agregar;
+        }
+        else if (accion.equalsIgnoreCase("agregar")) {
+            persona.setNombre(request.getParameter("txtNombre"));
+            persona.setDireccion(request.getParameter("txtDireccion"));
+            
+            personaDAO.agregar(persona);
+            
+            acceso = listar;
+        }
+        else if (accion.equalsIgnoreCase("editar")) {
+            request.setAttribute("idPersona", request.getParameter("id"));
+            acceso = editar;
+        }
+        else if (accion.equalsIgnoreCase("actualizar")) {
+            persona.setId(Integer.parseInt(request.getParameter("id")));
+            persona.setNombre(request.getParameter("txtNombre"));
+            persona.setDireccion(request.getParameter("txtDireccion"));
+            
+            personaDAO.editar(persona);
+            
+            acceso = listar;
+        }
+        else if (accion.equalsIgnoreCase("eliminar")) {
+            int idPersona = Integer.parseInt(request.getParameter("id"));
+            personaDAO.eliminar(idPersona);
+            acceso = listar;
+        }
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher(acceso);
+        dispatcher.forward(request, response);
     }
 
     @Override

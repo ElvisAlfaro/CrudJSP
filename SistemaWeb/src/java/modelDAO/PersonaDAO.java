@@ -25,7 +25,7 @@ public class PersonaDAO implements CRUD{
     @Override
     public List listar() {
         List<Persona> personas = new ArrayList<>();
-        String query = "select * from persona";
+        String query = "select * from persona where estado=1";
         try {
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
@@ -87,7 +87,14 @@ public class PersonaDAO implements CRUD{
 
     @Override
     public boolean eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String querString = "update persona set estado=0 where id="+id;
+        try {
+            preparedStatement = connection.prepareStatement(querString);
+            preparedStatement.executeUpdate();            
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar: "+e.getMessage());
+        }
+        return false;
     }
     
 }

@@ -42,8 +42,8 @@
                         <td><%= persona.getNombre()%></td>
                         <td><%= persona.getDireccion()%></td>
                         <td>
-                            <a href="controlador?accion=editar&id="<%=persona.getId()%>>Editar</a>
-                            <a href="controlador?accion=eliminar">Eliminar</a>
+                            <a href="controlador?accion=editar&id=<%= persona.getId()%>">Editar</a>
+                            <a href="controlador?accion=eliminar&id=<%= persona.getId()%>">Eliminar</a>
                         </td>
                     </tr>
                 <%}%>
