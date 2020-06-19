@@ -3,11 +3,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="./css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <title>JSP Page</title>
     </head>
     <body>
-        <div>
-            <a href="controlador?accion=listar">Listar personas </a>
+        <br>
+        <br>
+        <div class="container">
+            <a class="btn btn-success btn-lg" href="controlador?accion=listar">Listar personas </a>
         </div>
     </body>
 </html>
